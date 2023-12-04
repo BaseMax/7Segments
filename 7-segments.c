@@ -47,6 +47,26 @@ int decode(digit d)
     return -1; // invalid input
 }
 
+char* digitToString(digit d)
+{
+    char* str = (char*)malloc(8 * sizeof(char) + 1); // 7 digits + '\0'
+    if (str == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    str[0] = d.a ? '1' : '0';
+    str[1] = d.b ? '1' : '0';
+    str[2] = d.c ? '1' : '0';
+    str[3] = d.d ? '1' : '0';
+    str[4] = d.e ? '1' : '0';
+    str[5] = d.f ? '1' : '0';
+    str[6] = d.g ? '1' : '0';
+    str[7] = '\0';
+    
+    return str;
+}
+
 int main(int argc, char** argv)
 {
     int numbersToEncode[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -56,7 +76,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < numDigits; ++i) {
         digit encoded = encode(numbersToEncode[i]);
         int decoded = decode(encoded);
-        printf("Encoded: %d (%s) => Decoded: %d\n", numbersToEncode[i], toStr(encoded), decoded);
+        printf("Encoded: %d (%s) => Decoded: %d\n", numbersToEncode[i], digitToString(encoded), decoded);
     }
 
     return 0;
