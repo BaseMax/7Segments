@@ -47,7 +47,7 @@ int decode(digit d)
     return -1; // invalid input
 }
 
-char* digitToString(digit d)
+char* digitToString(digit d, bool isReserve)
 {
     char* str = (char*)malloc(8 * sizeof(char) + 1); // 7 digits + '\0'
     if (str == NULL) {
@@ -55,13 +55,19 @@ char* digitToString(digit d)
         exit(EXIT_FAILURE);
     }
 
-    str[0] = d.a ? '1' : '0';
-    str[1] = d.b ? '1' : '0';
-    str[2] = d.c ? '1' : '0';
-    str[3] = d.d ? '1' : '0';
-    str[4] = d.e ? '1' : '0';
-    str[5] = d.f ? '1' : '0';
-    str[6] = d.g ? '1' : '0';
+    char ch1 = '1';
+    char ch0 = '0';
+    if (!isReserve) {
+        ch1 = '0';
+        ch0 = '1';
+    }
+    str[0] = d.a ? ch1 : ch0;
+    str[1] = d.b ? ch1 : ch0;
+    str[2] = d.c ? ch1 : ch0;
+    str[3] = d.d ? ch1 : ch0;
+    str[4] = d.e ? ch1 : ch0;
+    str[5] = d.f ? ch1 : ch0;
+    str[6] = d.g ? ch1 : ch0;
     str[7] = '\0';
     
     return str;
@@ -76,7 +82,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < numDigits; ++i) {
         digit encoded = encode(numbersToEncode[i]);
         int decoded = decode(encoded);
-        printf("Encoded: %d (%s) => Decoded: %d\n", numbersToEncode[i], digitToString(encoded), decoded);
+        printf("Encoded: %d (%s - %s) => Decoded: %d\n", numbersToEncode[i], digitToString(encoded, false), digitToString(encoded, true), decoded);
     }
 
     return 0;
