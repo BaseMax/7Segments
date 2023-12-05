@@ -29,7 +29,7 @@ Compilation:
 Compile the source code using a C compiler. For example:
 
 ```
-gcc 7-segments.c -o 7
+gcc 7-segments.c -o digit_encoding7
 ```
 
 Run:
@@ -37,7 +37,7 @@ Run:
 Execute the compiled binary:
 
 ```bash
-./digit_encoding
+./digit_encoding7
 ```
 
 ## Functions
